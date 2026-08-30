@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UNIC GADGET | Online Store</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
+header{position:sticky;top:0;z-index:5;background:#0b1020;color:white;padding:14px 5%;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:900}.logo span{color:#00d9ff}nav a{color:#fff;text-decoration:none;margin:0 10px;font-size:14px}
+button{cursor:pointer}.cart,.login{padding:10px 13px;border-radius:9px;border:0}.cart{background:#00d9ff;font-weight:bold}.login{background:#182039;color:#fff;border:1px solid #39445f}
+.hero{min-height:480px;padding:65px 7%;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#080c18,#10233a,#003642);color:#fff}
+.hero h1{font-size:clamp(44px,7vw,76px);margin:12px 0}.hero h1 span{color:#00d9ff}.hero p{max-width:620px;font-size:18px;line-height:1.6;color:#cbd5e1}
+.hero button{padding:14px 20px;border:0;border-radius:10px;background:#00d9ff;font-weight:800}.art{font-size:110px}
+.wrap{width:min(1200px,92%);margin:auto}.section{padding:55px 0}.title{text-align:center;margin-bottom:25px}.title h2{font-size:32px}.title p{color:#6b7280}
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.cat{background:white;border:1px solid #e5e7eb;border-radius:16px;padding:20px;text-align:center;box-shadow:0 8px 25px #0000000c}.cat b{display:block;margin-top:8px}.emoji{font-size:38px}
+.tools{display:flex;gap:10px;margin-bottom:22px}.search{flex:1;padding:14px 17px;border:1px solid #ddd;border-radius:11px}.tools select{padding:12px;border:1px solid #ddd;border-radius:11px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:#fff;border:1px solid #e5e7eb;border-radius:17px;overflow:hidden;box-shadow:0 10px 30px #0000000b}.pic{height:190px;background:#eef2f7;display:grid;place-items:center;overflow:hidden;position:relative}.pic img{width:100%;height:100%;object-fit:cover}.pic b{position:absolute;top:9px;left:9px;background:#111827;color:#fff;padding:5px 7px;border-radius:7px;font-size:10px}.info{padding:15px}.info p{font-size:13px;color:#6b7280;min-height:32px}.price{font-size:20px;font-weight:900;margin:10px 0}.old{text-decoration:line-through;color:#9ca3af;font-size:12px;margin-left:5px}.add{width:100%;padding:11px;background:#111827;color:#fff;border:0;border-radius:9px;font-weight:bold}.features{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature{background:#111827;color:#fff;padding:20px;border-radius:15px}.feature p{color:#cbd5e1;font-size:13px}
+footer{background:#080c18;color:#94a3b8;padding:40px 0}footer h3{color:#fff}footer a{color:#00d9ff}
+.overlay{display:none;position:fixed;inset:0;background:#0009;z-index:10}.overlay.show{display:block}
+.drawer{position:fixed;right:-430px;top:0;width:min(420px,100%);height:100%;background:white;z-index:11;padding:22px;transition:.25s;overflow:auto}.drawer.show{right:0}
+.modal{display:none;position:fixed;inset:0;background:#000a;z-index:20;place-items:center;padding:20px}.modal.show{display:grid}.box{width:min(420px,100%);background:#fff;border-radius:18px;padding:24px;position:relative}.close{position:absolute;right:14px;top:14px;border:0;background:#eee;border-radius:7px;padding:7px}
+.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:bold;margin-bottom:5px}.field input{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px}.full{width:100%;padding:13px;border:0;border-radius:9px;background:#111827;color:#fff;font-weight:bold}.google{width:100%;padding:12px;background:#fff;border:1px solid #ddd;border-radius:9px;font-weight:bold}.note{font-size:11px;color:#9ca3af;line-height:1.5}
+.item{display:flex;gap:10px;padding:13px 0;border-bottom:1px solid #eee}.item .remove{margin-left:auto;border:0;background:none;color:#e11d48}.total{font-size:21px;font-weight:900;margin:20px 0}.wa{width:100%;padding:14px;background:#25d366;color:white;border:0;border-radius:9px;font-weight:bold}.call{width:100%;padding:13px;margin-top:9px;background:#111827;color:white;border:0;border-radius:9px}
+@media(max-width:900px){nav{display:none}.hero{padding:55px 5%}.cats{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:repeat(2,1fr)}.art{font-size:75px}}
+@media(max-width:550px){.hero{text-align:center}.art{display:none}.cats{grid-template-columns:repeat(2,1fr)}.grid{gap:10px}.pic{height:145px}.info{padding:11px}.features{grid-template-columns:1fr}}
+</style></head><body>
+
+<header><div class="logo">UNIC <span>GADGET</span></div>
+<nav><a href="#home">Home</a><a href="#categories">Categories</a><a href="#products">Products</a><a href="#contact">Contact</a></nav>
+<div><button class="login" onclick="openAuth()">👤 Login</button> <button class="cart" onclick="openCart()">🛒 <span id="count">0</span></button></div></header>
+
+<section class="hero" id="home"><div><small style="color:#00d9ff;font-weight:bold;letter-spacing:2px">WELCOME TO UNIC GADGET</small>
+<h1>Smart Stuff.<br><span>Better Life.</span></h1><p>Mobile accessories, mobile parts, gadgets, toys aur aesthetic products — sab kuch ek hi modern online store mein.</p>
+<button onclick="document.getElementById('products').scrollIntoView()">Shop Now →</button></div><div class="art">📱 🎧 ⌚</div></section>
+
+<section class="section" id="categories"><div class="wrap"><div class="title"><h2>Shop By Category</h2><p>Apni favourite category choose karo.</p></div>
+<div class="cats"><button class="cat" onclick="cat('accessories')"><span class="emoji">📱</span><b>Accessories</b></button><button class="cat" onclick="cat('parts')"><span class="emoji">🔧</span><b>Mobile Parts</b></button><button class="cat" onclick="cat('gadgets')"><span class="emoji">⚡</span><b>Gadgets</b></button><button class="cat" onclick="cat('toys')"><span class="emoji">🧸</span><b>Toys</b></button><button class="cat" onclick="cat('aesthetic')"><span class="emoji">✨</span><b>Aesthetic</b></button></div></div></section>
+
+<section class="section" id="products"><div class="wrap"><div class="title"><h2>🔥 Featured Products</h2><p>Demo products — apne real products/photos baad mein replace kar sakte ho.</p></div>
+<div class="tools"><input class="search" id="search" placeholder="🔍 Search products..." oninput="render()"><select id="sort" onchange="render()"><option value="default">Featured</option><option value="low">Price Low → High</option><option value="high">Price High → Low</option></select></div>
+<div class="grid" id="grid"></div></div></section>
+
+<section class="section"><div class="wrap"><div class="features"><div class="feature">🚚<h3>Fast Delivery</h3><p>Quick shipping for orders.</p></div><div class="feature">🔒<h3>Secure Shopping</h3><p>Safe shopping experience.</p></div><div class="feature">💬<h3>WhatsApp Support</h3><p>Direct customer support.</p></div><div class="feature">⭐<h3>Quality Products</h3><p>Useful products at good prices.</p></div></div></div></section>
+
+<footer id="contact"><div class="wrap"><h3>UNIC <span style="color:#00d9ff">GADGET</span></h3><p>Mobile Accessories • Parts • Gadgets • Toys • Aesthetic Items</p><p>📞 <a href="tel:+919461142864">+91 94611 42864</a> &nbsp; | &nbsp; 💬 WhatsApp</p><p style="font-size:12px">© 2026 UNIC GADGET</p></div></footer>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+<aside class="drawer" id="drawer"><button class="close" onclick="closeCart()">✕</button><h2>🛒 Your Cart</h2><div id="items"></div><div class="total">Total: ₹<span id="total">0</span></div><button class="wa" onclick="whatsapp()">Order on WhatsApp</button><button class="call" onclick="location.href='tel:+919461142864'">📞 Call +91 94611 42864</button></aside>
+
+<div class="modal" id="auth"><div class="box"><button class="close" onclick="closeAuth()">✕</button><h2 id="authTitle">Login</h2><p id="authSub">Login to your UNIC GADGET account.</p>
+<button class="google" onclick="google()">🔵 Continue with Google</button><p style="text-align:center;color:#999;font-size:12px">OR</p>
+<div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
+<button class="full" onclick="demoLogin()">Continue</button><p class="note">Google sign-in ko real banane ke liye Firebase Authentication + Google OAuth setup karna hoga. Ye demo Google password collect nahi karta.</p>
+<p style="text-align:center;font-size:13px">New customer? <button onclick="toggleAuth()" style="border:0;background:none;color:#7c3aed;font-weight:bold">Create account</button></p></div></div>
+
+<script>
+const P=[
+[1,"Wireless Earbuds Pro","accessories",799,999,"🎧","https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=800&q=85"],
+[2,"20W Fast Charger","accessories",499,699,"🔌","https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=85"],
+[3,"Premium Phone Case","accessories",299,399,"📱","https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=800&q=85"],
+[4,"Replacement Battery","parts",699,899,"🔋","https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=85"],
+[5,"Mobile Display","parts",1499,1799,"🛠️","https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=85"],
+[6,"Smart Watch","gadgets",999,1499,"⌚","https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=85"],
+[7,"Mini Bluetooth Speaker","gadgets",699,899,"🔊","https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=85"],
+[8,"RGB Gaming Mouse","gadgets",599,799,"🖱️","https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=85"],
+[9,"Remote Control Car","toys",899,1199,"🚗","https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=800&q=85"],
+[10,"Aesthetic LED Lamp","aesthetic",499,699,"💡","https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=85"],
+[11,"Desk Decor Set","aesthetic",399,599,"✨","https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=800&q=85"],
+[12,"Cute Plush Toy","toys",599,799,"🧸","https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=800&q=85"]
+];
+let category="all",cart=[];
+function render(){let q=document.getElementById("search").value.toLowerCase(),s=document.getElementById("sort").value;
+let a=P.filter(x=>(category=="all"||x[2]==category)&&x[1].toLowerCase().includes(q));if(s=="low")a.sort((x,y)=>x[3]-y[3]);if(s=="high")a.sort((x,y)=>y[3]-x[3]);
+document.getElementById("grid").innerHTML=a.map(x=>`<article class="product"><div class="pic"><b>${x[2].toUpperCase()}</b><img src="${x[6]}" onerror="this.style.display='none'"><span style="font-size:65px">${x[5]}</span></div><div class="info"><h3>${x[1]}</h3><p>Premium quality ${x[2]} product.</p><div class="price">₹${x[3]} <span class="old">₹${x[4]}</span></div><button class="add" onclick="add(${x[0]})">Add To Cart</button></div></article>`).join("")}
+function cat(c){category=c;document.getElementById("products").scrollIntoView();render()}
+function add(id){let p=P.find(x=>x[0]==id),e=cart.find(x=>x[0]==id);if(e)e[7]++;else cart.push([...p,1]);update();openCart()}
+function update(){document.getElementById("count").textContent=cart.reduce((s,x)=>s+x[7],0);document.getElementById("items").innerHTML=cart.length?cart.map(x=>`<div class="item"><div>${x[5]}</div><div><b>${x[1]}</b><br>₹${x[3]} × ${x[7]}<br><button onclick="qty(${x[0]},-1)">−</button> <button onclick="qty(${x[0]},1)">+</button></div><button class="remove" onclick="removeItem(${x[0]})">✕</button></div>`).join(""):"<p style='color:#6b7280'>Cart is empty.</p>";document.getElementById("total").textContent=cart.reduce((s,x)=>s+x[3]*x[7],0)}
+function qty(id,n){let x=cart.find(x=>x[0]==id);x[7]+=n;if(x[7]<=0)removeItem(id);else update()}function removeItem(id){cart=cart.filter(x=>x[0]!=id);update()}
+function openCart(){drawer.classList.add("show");overlay.classList.add("show")}function closeCart(){drawer.classList.remove("show");overlay.classList.remove("show")}
+function whatsapp(){if(!cart.length)return alert("Cart is empty.");let m="Hello UNIC GADGET!%0A%0AI want to order:%0A";cart.forEach(x=>m+=`• ${x[1]} × ${x[7]} — ₹${x[3]*x[7]}%0A`);m+=`%0ATotal: ₹${cart.reduce((s,x)=>s+x[3]*x[7],0)}`;window.open("https://wa.me/919461142864?text="+m,"_blank")}
+function openAuth(){auth.classList.add("show")}function closeAuth(){auth.classList.remove("show")}function closeAll(){closeCart();closeAuth()}
+function toggleAuth(){authTitle.textContent=authTitle.textContent=="Login"?"Create Account":"Login";authSub.textContent=authTitle.textContent=="Login"?"Login to your UNIC GADGET account.":"Create your UNIC GADGET account."}
+function google(){alert("Google login needs Firebase Authentication + Google OAuth configuration.")}
+function demoLogin(){alert("Demo login. Connect Firebase Authentication for real login/signup.")}
+render();update();
+</script></body></html>
